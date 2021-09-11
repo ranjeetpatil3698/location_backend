@@ -28,6 +28,12 @@ exports.getDistance = async (req, res) => {
 
         //fetching direction for source and destination provided
         direction = await getDirections(source_cordinates, destination_cordinates);
+
+        if (!direction) {
+            //if direction does not exists returns 400 with error
+            res.status(400).json({ message: "Invalid Input Please check your source and destination" });
+            return;
+        }
         
     } catch (err) {
         //if any of above API calls of MAPBOX returns error,log them to console and return 500 server error response
