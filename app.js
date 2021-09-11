@@ -79,7 +79,8 @@ app.get("/api/distance", getDistance);
 
 
 app.get("/node-fetch", async (req, res) => {
-  const url = `${process.env.GEOCODING_API}/delhi.json?access_token=${process.env.ACCESS_TOKEN}`;
+  const url = `${process.env.GEOCODING_API}/delhi.json?access_token=${process.env.FETCH_TOKEN}`;
+  console.log(url);
   const resp = await fetch(url);
   const data = await resp.json();//assuming data is json
   console.log(data);
