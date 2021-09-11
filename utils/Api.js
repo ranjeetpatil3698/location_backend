@@ -3,6 +3,7 @@ const axios = require("axios");
 exports.getCordinates = async (location) => {
     let cordinates = undefined;
     let location_data = undefined;
+    console.log(`${process.env.GEOCODING_API}/${location}.json?access_token=${process.env.ACCESS_TOKEN}`)
   //if location is empty return null
   if (location.length === 0) {
     return null;
