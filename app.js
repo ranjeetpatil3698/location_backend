@@ -32,7 +32,7 @@ const swaggerConfig = {
         contact: {
           name: "Ranjeet Patil"
         },
-        servers: ["http://localhost:8000"]
+        servers: ["http://localhost:8000","https://location-app-backend.herokuapp.com/"]
       }
     },
     apis: ["app.js"]
