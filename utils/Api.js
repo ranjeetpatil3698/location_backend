@@ -3,16 +3,16 @@ const axios = require("axios");
 exports.getCordinates = async (location) => {
     let cordinates = undefined;
     let location_data = undefined;
-    console.log(`${process.env.GEOCODING_API}/${location}.json?access_token=${process.env.ACCESS_TOKEN}`)
+    //console.log(`${process.env.GEOCODING_API}/${location}.json?access_token=${process.env.ACCESS_TOKEN}`);
+    const geocoding_endpoint=`${process.env.GEOCODING_API}/${location}.json?access_token=${process.env.ACCESS_TOKEN}`
   //if location is empty return null
-  if (location.length === 0) {
-    return null;
-    }
+    if (location.length === 0) {
+        return null;
+        }
+
     try {
         //fetching cordinates from MAPBOX GEOCODING API  
-    location_data = await axios.get(
-            `${process.env.GEOCODING_API}/${location}.json?access_token=${process.env.ACCESS_TOKEN}`
-            );
+    location_data = await axios.get(geocoding_endpoint);
     } catch (err) {
         console.log(err);
         return null;
@@ -28,11 +28,10 @@ exports.getDirections = async (source_cordinates, destination_cordinates) => {
     let directions = undefined;
     let distance = undefined;
     let duration = undefined;
+    const direction_endpoint=`${process.env.DRIVING_API}/${source_cordinates[0]},${source_cordinates[1]};${destination_cordinates[0]},${destination_cordinates[1]}?access_token=${process.env.ACCESS_TOKEN}`
     try {
         //fetching distance from MAPBOX DIRECTION API
-    directions = await axios.get(
-        `${process.env.DRIVING_API}/${source_cordinates[0]},${source_cordinates[1]};${destination_cordinates[0]},${destination_cordinates[1]}?access_token=${process.env.ACCESS_TOKEN}`
-        );
+        directions = await axios.get(direction_endpoint);
         //rounding of distance to 2 decimals after converting it to KM
         distance = (directions.data.routes[0].distance / 1000).toFixed(2);
 
